@@ -1,0 +1,106 @@
+% Simple package for inserting notes
+% ChaTo - http://www.chato.cl/
+% Wed Dec 24 13:33:00 CET 2008
+% Wed Sep  2 16:01:56 EDT 2015 (Matteo)
+%
+% Copyright 2015 Matteo Riondato (http://matteo.rionda.to)
+%
+% Licensed under the Apache License, Version 2.0 (the "License");
+% you may not use this file except in compliance with the License.
+% You may obtain a copy of the License at
+%
+%     http://www.apache.org/licenses/LICENSE-2.0
+%
+% Unless required by applicable law or agreed to in writing, software
+% distributed under the License is distributed on an "AS IS" BASIS,
+% WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+% See the License for the specific language governing permissions and
+% limitations under the License.
+
+\ProvidesPackage{chato-notes}[2010/02/09 ChaTo notes -- modified by Aris, and Matteo]
+\RequirePackage{color,marvosym,helvet,xspace}
+
+% Colors
+\definecolor{MyRed}{rgb}{0.6,0.0,0.0}
+\definecolor{MyBlue}{rgb}{0.0,0.0,0.6}
+\definecolor{MyGreen}{rgb}{0.0,0.6,0.0}
+\definecolor{MyPurple}{rgb}{0.340,0.105,0.555}
+\definecolor{MyBlack}{rgb}{0.1,0.1,0.1}
+\newcommand{\inred}[1]{{\color{MyRed}\sf\textbf{\textsc{#1}}}}
+\newcommand{\inpurple}[1]{{\color{MyPurple}\sf\textbf{\textsc{#1}}}}
+\newcommand{\inblue}[1]{{\color{MyBlue}\sf\textbf{\textsc{#1}}}}
+\newcommand{\ingreen}[1]{{\color{MyGreen}\sf\textbf{\textsc{#1}}}}
+
+% Frame
+\newcommand{\frameitred}[2]{
+    \begin{center}
+    {\color{MyRed}
+    \framebox[.9\columnwidth][l]{
+        \begin{minipage}{.85\columnwidth}
+        \inred{#1}: {\sf\color{MyBlack}#2}
+        \end{minipage}
+    }\\
+    }
+    \end{center}
+}
+
+\newcommand{\frameitpurple}[2]{
+    \begin{center}
+    {\color{MyPurple}
+    \framebox[.9\columnwidth][l]{
+        \begin{minipage}{.85\columnwidth}
+        \inpurple{#1}: {\sf\color{MyBlack}#2}
+        \end{minipage}
+    }\\
+    }
+    \end{center}
+}
+
+\newcommand{\frameitblue}[2]{
+    \begin{center}
+    {\color{MyBlue}
+    \framebox[.9\columnwidth][l]{
+        \begin{minipage}{.85\columnwidth}
+	\inblue{#1}: {\sf\color{MyBlack}#2}
+        \end{minipage}
+    }\\
+    }
+    \end{center}
+}
+
+\newcommand{\frameitgreen}[2]{
+    \begin{center}
+    {\color{MyGreen}
+    \framebox[.9\columnwidth][l]{
+        \begin{minipage}{.85\columnwidth}
+	\ingreen{#1}: {\sf\color{MyBlack}#2}
+        \end{minipage}
+    }\\
+    }
+    \end{center}
+}
+
+\DeclareOption{show}{
+	%\newcommand{\note}[2][]{\def\@tmpsig{#1}\frameit{{\Pointinghand} Note}{#2\ifx \@tmpsig \@empty \else \mbox{ --\em #1}\fi}}
+	\newcommand{\mynote}[2][]{\def\@tmpsig{#1}\frameitpurple{{\Pointinghand} Note\ifx \@tmpsig \@empty \else \mbox{ (#1)}\fi}{#2}}
+	\newcommand{\question}[2][]{\def\@tmpsig{#1}\frameitred{{?} Question\ifx \@tmpsig \@empty \else \mbox{ (#1)}\fi}{#2}}
+	\newcommand{\todo}[2][]{\def\@tmpsig{#1}\frameitgreen{{\Checkedbox} To-Do\ifx \@tmpsig \@empty \else \mbox{ (#1)}\fi}{#2}}
+	\newcommand{\reply}[2][]{\def\@tmpsig{#1}\frameitblue{{\Writinghand} Reply\ifx \@tmpsig \@empty \else \mbox{ (#1)}\fi}{#2}}
+	\newcommand{\inote}[1]{\inpurple{$\lceil${{\Pointinghand} }} {\sf #1} \inpurple{$\rfloor$}}
+	\newcommand{\iquestion}[1]{\inred{$\lceil${{?} }} {\sf #1} \inred{$\rfloor$}}
+	\newcommand{\itodo}[1]{\ingreen{$\lceil${{\Checkedbox} }} {\sf #1} \ingreen{$\rfloor$}}
+	\newcommand{\ireply}[1]{\inblue{$\lceil${{\Writinghand} }} {\sf #1} \inblue{$\rfloor$}}
+	\newcommand{\citemissing}[0]{\inred{[citation]}\xspace}
+	\newcommand{\refmissing}[0]{\inred{reference}\xspace}
+}
+\DeclareOption{hide}{
+	\newcommand{\mynote}[2][]{}
+	\newcommand{\todo}[2][]{}
+	\newcommand{\reply}[2][]{}
+	\newcommand{\inote}[1][]{}
+	\newcommand{\itodo}[1][]{}
+	\newcommand{\ireply}[1][]{}
+	\newcommand{\citemissing}[0]{}
+	\newcommand{\refmissing}[0]{}
+}
+\ProcessOptions
