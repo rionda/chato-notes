@@ -21,109 +21,82 @@
 
 \DeclareOption{show}{
   % Colors
-  \definecolor{ChaToRed}{rgb}{0.6,0.0,0.0}
-  \definecolor{ChaToBlue}{rgb}{0.0,0.0,0.6}
-  \definecolor{ChaToGreen}{rgb}{0.0,0.6,0.0}
-  \definecolor{ChaToPurple}{rgb}{0.340,0.105,0.555}
-  \definecolor{ChaToBlack}{rgb}{0.1,0.1,0.1}
-  \newcommand{\ChaToinred}[1]{{\color{ChaToRed}\sf\textbf{\textsc{#1}}}}
-  \newcommand{\ChaToinpurple}[1]{{\color{ChaToPurple}\sf\textbf{\textsc{#1}}}}
-  \newcommand{\ChaToinblue}[1]{{\color{ChaToBlue}\sf\textbf{\textsc{#1}}}}
-  \newcommand{\ChaToingreen}[1]{{\color{ChaToGreen}\sf\textbf{\textsc{#1}}}}
+  \definecolor{chato@clrred}{rgb}{0.6,0.0,0.0}
+  \definecolor{chato@clrblue}{rgb}{0.0,0.0,0.6}
+  \definecolor{chato@clrgreen}{rgb}{0.0,0.6,0.0}
+  \definecolor{chato@clrpurple}{rgb}{0.340,0.105,0.555}
 
-  % Frame
-  \newcommand{\ChaToframeitred}[2]{
+  % Command colors
+  \newcommand{\chato@clrquestion}[0]{chato@clrred}
+  \newcommand{\chato@clrmynote}[0]{chato@clrpurple}
+  \newcommand{\chato@clrtodo}[0]{chato@clrgreen}
+  \newcommand{\chato@clrreply}[0]{chato@clrblue}
+
+  % Command symbols
+  \newcommand{\chato@symquestion}[0]{?}
+  \newcommand{\chato@symmynote}[0]{\Pointinghand}
+  \newcommand{\chato@symtodo}[0]{\Checkedbox}
+  \newcommand{\chato@symreply}[0]{\Writinghand}
+
+  % Command texts
+  \newcommand{\chato@textquestion}[0]{Question}
+  \newcommand{\chato@textmynote}[0]{Note}
+  \newcommand{\chato@texttodo}[0]{To-Do}
+  \newcommand{\chato@textreply}[0]{Reply}
+
+  % General text
+  \newcommand{\chato@fortext}[0]{for}
+  \newcommand{\chato@fromtext}[0]{from}
+
+  % Inline
+  \newcommand{\chato@icmdopen}[0]{\ensuremath\lceil}
+  \newcommand{\chato@icmdclose}[0]{\ensuremath\rfloor}
+  \newcommand{\chato@icmd}[2]{
+    \expandafter{\color{\csname chato@clr#1\endcsname}\sf
+      \chato@icmdopen\csname chato@sym#1\endcsname\ 
+      {\color{black} #2} \chato@icmdclose}}
+
+  \newcommand{\iquestion}[1]{\chato@icmd{question}{#1}}
+  \newcommand{\inote}[1]{\chato@icmd{mynote}{#1}}
+  \newcommand{\itodo}[1]{\chato@icmd{todo}{#1}}
+  \newcommand{\ireply}[1]{\chato@icmd{reply}{#1}}
+
+  % Missing citations/references
+  \newcommand{\chato@citemissingnclr}{chato@clrred}
+  \newcommand{\chato@refmissingclr}{chato@clrred}
+  \newcommand{\citemissing}[0]{\chato@citemissingclr{[citation]}\xspace}
+  \newcommand{\refmissing}[0]{\chato@refmissingclr{reference}\xspace}
+
+  % Option processing for frames
+  \newcommand{\chato@relax}{chato@relax}
+  \define@key{chato}{author}{\ifx\chato@relax#1\chato@relax
+  \ifx\chatoauthor\@undefined \else \let\chatoauthor\@undefined \fi \else\def\chato@author{#1}\fi}
+  \define@key{chato}{to}{\ifx\chato@relax#1\chato@relax
+  \ifx\chatoto\@undefined \else \let\chatoto\@undefined \fi \else \def\chato@to{#1} \fi}
+  \presetkeys{chato}{author=}{}%
+  \presetkeys{chato}{to=}{}%
+
+  % Frames
+  \newcommand{\chato@cmd}[3][]{
+    \setkeys{chato}{#1}
+    \expandafter
     \begin{center}
-      {\color{ChaToRed}
+      {\color{\csname chato@clr#2\endcsname}
         \framebox[.9\columnwidth][l]{
           \begin{minipage}{.85\columnwidth}
-            \ChaToinred{#1}: {\sf\color{ChaToBlack}#2}
+            \sf \csname chato@sym#2\endcsname\ \csname chato@text#2\endcsname
+              \ifx\chato@to\@undefined \else \mbox{ \chato@fortext\ \chato@to}\fi
+              \ifx\chato@author\@undefined\else\mbox{ \chato@fromtext\ \chato@author}\fi:
+              {\color{black}#3}
           \end{minipage}
-        }\\
+        }
       }
     \end{center}
   }
-
-  \newcommand{\ChaToframeitpurple}[2]{
-    \begin{center}
-      {\color{ChaToPurple}
-        \framebox[.9\columnwidth][l]{
-          \begin{minipage}{.85\columnwidth}
-            \ChaToinpurple{#1}: {\sf\color{ChaToBlack}#2}
-          \end{minipage}
-        }\\
-      }
-    \end{center}
-  }
-
-  \newcommand{\ChaToframeitblue}[2]{
-    \begin{center}
-      {\color{ChaToBlue}
-        \framebox[.9\columnwidth][l]{
-          \begin{minipage}{.85\columnwidth}
-            \ChaToinblue{#1}: {\sf\color{ChaToBlack}#2}
-          \end{minipage}
-        }\\
-      }
-    \end{center}
-  }
-
-  \newcommand{\ChaToframeitgreen}[2]{
-    \begin{center}
-      {\color{ChaToGreen}
-        \framebox[.9\columnwidth][l]{
-          \begin{minipage}{.85\columnwidth}
-            \ChaToingreen{#1}: {\sf\color{ChaToBlack}#2}
-          \end{minipage}
-        }\\
-      }
-    \end{center}
-  }
-
-  %\newcommand{\note}[2][]{\def\@tmpsig{#1}\ChaToframeit{{\Pointinghand} Note}{#2\ifx \@tmpsig \@empty \else \mbox{ --\em #1}\fi}}
-  %\newcommand{\mynote}[2][]{\def\@tmpsig{#1}\ChaToframeitpurple{{\Pointinghand} Note\ifx \@tmpsig \@empty \else \mbox{ (#1)}\fi}{#2}}
-  %\newcommand{\question}[2][]{\def\@tmpsig{#1}\ChaToframeitred{{?} Question\ifx \@tmpsig \@empty \else \mbox{ (#1)}\fi}{#2}}
-  %\newcommand{\todo}[2][]{\def\@tmpsig{#1}\ChaToframeitgreen{{\Checkedbox} To-Do\ifx \@tmpsig \@empty \else \mbox{ (#1)}\fi}{#2}}
-  %\newcommand{\reply}[2][]{\def\@tmpsig{#1}\ChaToframeitblue{{\Writinghand} Reply\ifx \@tmpsig \@empty \else \mbox{ (#1)}\fi}{#2}}
-  \newcommand{\inote}[1]{\ChaToinpurple{$\lceil${{\Pointinghand} }} {\sf #1} \ChaToinpurple{$\rfloor$}}
-  \newcommand{\iquestion}[1]{\ChaToinred{$\lceil${{?} }} {\sf #1} \ChaToinred{$\rfloor$}}
-  \newcommand{\itodo}[1]{\ChaToingreen{$\lceil${{\Checkedbox} }} {\sf #1} \ChaToingreen{$\rfloor$}}
-  \newcommand{\ireply}[1]{\ChaToinblue{$\lceil${{\Writinghand} }} {\sf #1} \ChaToinblue{$\rfloor$}}
-  \newcommand{\citemissing}[0]{\ChaToinred{[citation]}\xspace}
-  \newcommand{\refmissing}[0]{\ChaToinred{reference}\xspace}
-
-  \newcommand{\ChaToempty}{ChaToempty}
-  \define@key{ChaTo}{author}{\ifx\ChaToempty#1\ChaToempty
-  \ifx\ChaToauthor\@undefined \else \let\ChaToauthor\@undefined \fi \else\def\ChaToauthor{#1}\fi}
-  \define@key{ChaTo}{to}{\ifx\ChaToempty#1\ChaToempty
-  \ifx\ChaToto\@undefined \else \let\ChaToto\@undefined \fi \else \def\ChaToto{#1} \fi}
-  \presetkeys{ChaTo}{author=}{}%
-  \presetkeys{ChaTo}{to=}{}%
-
-  \newcommand{\question}[2][]{
-    \setkeys{ChaTo}{#1}
-    \ChaToframeitred{{?} Question\ifx\ChaToauthor\@undefined \else
-      \mbox{ from \ChaToauthor}\fi\ifx\ChaToto\@undefined\else\mbox{ to
-  \ChaToto}\fi}{#2}}
-
-  \newcommand{\mynote}[2][]{
-    \setkeys{ChaTo}{#1}
-    \ChaToframeitpurple{{\Pointinghand} Note\ifx\ChaToauthor\@undefined \else
-      \mbox{ by \ChaToauthor}\fi\ifx\ChaToto\@undefined\else\mbox{ to
-  \ChaToto}\fi}{#2}}
-
-  \newcommand{\todo}[2][]{
-    \setkeys{ChaTo}{#1}
-    \ChaToframeitgreen{{\Checkedbox} To-Do\ifx\ChaToto\@undefined \else
-      \mbox{ for \ChaToto}\fi\ifx\ChaToauthor\@undefined\else\mbox{ from
-  \ChaToauthor}\fi}{#2}}
-
-  \newcommand{\reply}[2][]{
-    \setkeys{ChaTo}{#1}
-    \ChaToframeitblue{{\Writinghand} Reply\ifx\ChaToto\@undefined \else
-      \mbox{ to \ChaToto}\fi\ifx\ChaToauthor\@undefined\else\mbox{ from
-  \ChaToauthor}\fi}{#2}}
-
+  \newcommand{\question}[2][]{\chato@cmd[#1]{question}{#2}}
+  \newcommand{\mynote}[2][]{\chato@cmd[#1]{mynote}{#2}}
+  \newcommand{\todo}[2][]{\chato@cmd[#1]{todo}{#2}}
+  \newcommand{\reply}[2][]{\chato@cmd[#1]{reply}{#2}}
 }
 \DeclareOption{hide}{
   \newcommand{\question}[2][]{}
