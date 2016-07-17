@@ -19,18 +19,15 @@
 \ProvidesPackage{chato-notes}[2015/09/22 v0.001a ChaTo notes]
 \RequirePackage{color,ifthen,helvet,marvosym,xkeyval,xspace}
 
-% Colors
+% Command colors
 \definecolor{chato@clrred}{rgb}{0.6,0.0,0.0}
 \definecolor{chato@clrblue}{rgb}{0.0,0.0,0.6}
 \definecolor{chato@clrgreen}{rgb}{0.0,0.6,0.0}
 \definecolor{chato@clrpurple}{rgb}{0.340,0.105,0.555}
-
-% Command colors
 \newcommand{\chato@clrquestion}[0]{chato@clrred}
 \newcommand{\chato@clrmynote}[0]{chato@clrpurple}
 \newcommand{\chato@clrtodo}[0]{chato@clrgreen}
 \newcommand{\chato@clrreply}[0]{chato@clrblue}
-
 % Command symbols
 \newcommand{\chato@symquestion}[0]{?}
 \newcommand{\chato@symmynote}[0]{\Pointinghand}
@@ -42,18 +39,25 @@
 \newcommand{\chato@textmynote}[0]{Note}
 \newcommand{\chato@texttodo}[0]{To-Do}
 \newcommand{\chato@textreply}[0]{Reply}
-
 % for/from text for framed inserts
 \newcommand{\chato@fortext}[0]{for}
 \newcommand{\chato@fromtext}[0]{from}
-
 % Option processing for framed inserts
-\define@key{chato}{author}{\ifx\relax#1\relax
+\newcommand{\chato@processauthor}[1]{\ifx\relax#1\relax
 \ifx\chato@author\@undefined \else \let\chato@author\@undefined \fi \else\def\chato@author{#1}\fi}
-\define@key{chato}{to}{\ifx\relax#1\relax
-\ifx\chato@to\@undefined \else \let\chato@to\@undefined \fi \else \def\chato@to{#1} \fi}
-\presetkeys{chato}{author=}{}%
-\presetkeys{chato}{to=}{}%
+\newcommand{\chato@processto}[1]{\ifx\relax#1\relax
+\ifx\chato@to\@undefined \else \let\chato@to\@undefined \fi \else
+\def\chato@to{#1} \fi}
+\define@key{chato}{author}{\chato@processauthor}
+\define@key{chato}{from}{\chato@processauthor}
+\define@key{chato}{by}{\chato@processauthor}
+\define@key{chato}{to}{\chato@processto}
+\define@key{chato}{for}{\chato@processto}
+\presetkeys{chato}{author=}{}
+\presetkeys{chato}{from=}{}
+\presetkeys{chato}{by=}{}
+\presetkeys{chato}{to=}{}
+\presetkeys{chato}{for=}{}
 % Framed inserts template
 \newcommand{\chato@cmd}[3][]{
   \setkeys{chato}{#1}
