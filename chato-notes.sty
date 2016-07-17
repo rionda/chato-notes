@@ -19,95 +19,99 @@
 \ProvidesPackage{chato-notes}[2015/09/22 v0.001a ChaTo notes]
 \RequirePackage{color,ifthen,helvet,marvosym,xkeyval,xspace}
 
-\DeclareOption{show}{
-  % Colors
-  \definecolor{chato@clrred}{rgb}{0.6,0.0,0.0}
-  \definecolor{chato@clrblue}{rgb}{0.0,0.0,0.6}
-  \definecolor{chato@clrgreen}{rgb}{0.0,0.6,0.0}
-  \definecolor{chato@clrpurple}{rgb}{0.340,0.105,0.555}
+% Colors
+\definecolor{chato@clrred}{rgb}{0.6,0.0,0.0}
+\definecolor{chato@clrblue}{rgb}{0.0,0.0,0.6}
+\definecolor{chato@clrgreen}{rgb}{0.0,0.6,0.0}
+\definecolor{chato@clrpurple}{rgb}{0.340,0.105,0.555}
 
-  % Command colors
-  \newcommand{\chato@clrquestion}[0]{chato@clrred}
-  \newcommand{\chato@clrmynote}[0]{chato@clrpurple}
-  \newcommand{\chato@clrtodo}[0]{chato@clrgreen}
-  \newcommand{\chato@clrreply}[0]{chato@clrblue}
+% Command colors
+\newcommand{\chato@clrquestion}[0]{chato@clrred}
+\newcommand{\chato@clrmynote}[0]{chato@clrpurple}
+\newcommand{\chato@clrtodo}[0]{chato@clrgreen}
+\newcommand{\chato@clrreply}[0]{chato@clrblue}
 
-  % Command symbols
-  \newcommand{\chato@symquestion}[0]{?}
-  \newcommand{\chato@symmynote}[0]{\Pointinghand}
-  \newcommand{\chato@symtodo}[0]{\Checkedbox}
-  \newcommand{\chato@symreply}[0]{\Writinghand}
+% Command symbols
+\newcommand{\chato@symquestion}[0]{?}
+\newcommand{\chato@symmynote}[0]{\Pointinghand}
+\newcommand{\chato@symtodo}[0]{\Checkedbox}
+\newcommand{\chato@symreply}[0]{\Writinghand}
 
-  % Command texts
-  \newcommand{\chato@textquestion}[0]{Question}
-  \newcommand{\chato@textmynote}[0]{Note}
-  \newcommand{\chato@texttodo}[0]{To-Do}
-  \newcommand{\chato@textreply}[0]{Reply}
+% Command texts for framed inserts
+\newcommand{\chato@textquestion}[0]{Question}
+\newcommand{\chato@textmynote}[0]{Note}
+\newcommand{\chato@texttodo}[0]{To-Do}
+\newcommand{\chato@textreply}[0]{Reply}
 
-  % General text
-  \newcommand{\chato@fortext}[0]{for}
-  \newcommand{\chato@fromtext}[0]{from}
+% for/from text for framed inserts
+\newcommand{\chato@fortext}[0]{for}
+\newcommand{\chato@fromtext}[0]{from}
 
-  % Inline
-  \newcommand{\chato@icmdopen}[0]{\ensuremath\lceil}
-  \newcommand{\chato@icmdclose}[0]{\ensuremath\rfloor}
-  \newcommand{\chato@icmd}[2]{
-    \expandafter{\color{\csname chato@clr#1\endcsname}\sf
-      \chato@icmdopen\csname chato@sym#1\endcsname\ 
-      {\color{black} #2} \chato@icmdclose}}
-
-  \newcommand{\iquestion}[1]{\chato@icmd{question}{#1}}
-  \newcommand{\inote}[1]{\chato@icmd{mynote}{#1}}
-  \newcommand{\itodo}[1]{\chato@icmd{todo}{#1}}
-  \newcommand{\ireply}[1]{\chato@icmd{reply}{#1}}
-
-  % Missing citations/references
-  \newcommand{\chato@citemissingnclr}{chato@clrred}
-  \newcommand{\chato@refmissingclr}{chato@clrred}
-  \newcommand{\citemissing}[0]{\chato@citemissingclr{[citation]}\xspace}
-  \newcommand{\refmissing}[0]{\chato@refmissingclr{reference}\xspace}
-
-  % Option processing for frames
-  \newcommand{\chato@relax}{chato@relax}
-  \define@key{chato}{author}{\ifx\chato@relax#1\chato@relax
-  \ifx\chatoauthor\@undefined \else \let\chatoauthor\@undefined \fi \else\def\chato@author{#1}\fi}
-  \define@key{chato}{to}{\ifx\chato@relax#1\chato@relax
-  \ifx\chatoto\@undefined \else \let\chatoto\@undefined \fi \else \def\chato@to{#1} \fi}
-  \presetkeys{chato}{author=}{}%
-  \presetkeys{chato}{to=}{}%
-
-  % Frames
-  \newcommand{\chato@cmd}[3][]{
-    \setkeys{chato}{#1}
-    \expandafter
-    \begin{center}
-      {\color{\csname chato@clr#2\endcsname}
-        \framebox[.9\columnwidth][l]{
-          \begin{minipage}{.85\columnwidth}
-            \sf \csname chato@sym#2\endcsname\ \csname chato@text#2\endcsname
-              \ifx\chato@to\@undefined \else \mbox{ \chato@fortext\ \chato@to}\fi
-              \ifx\chato@author\@undefined\else\mbox{ \chato@fromtext\ \chato@author}\fi:
-              {\color{black}#3}
-          \end{minipage}
-        }
+% Option processing for framed inserts
+\define@key{chato}{author}{\ifx\relax#1\relax
+\ifx\chato@author\@undefined \else \let\chato@author\@undefined \fi \else\def\chato@author{#1}\fi}
+\define@key{chato}{to}{\ifx\relax#1\relax
+\ifx\chato@to\@undefined \else \let\chato@to\@undefined \fi \else \def\chato@to{#1} \fi}
+\presetkeys{chato}{author=}{}%
+\presetkeys{chato}{to=}{}%
+% Framed inserts template
+\newcommand{\chato@cmd}[3][]{
+  \setkeys{chato}{#1}
+  \expandafter
+  \begin{center}
+    {\color{\csname chato@clr#2\endcsname}
+      \framebox[.9\columnwidth][l]{
+        \begin{minipage}{.85\columnwidth}
+          \sf \csname chato@sym#2\endcsname\ \csname chato@text#2\endcsname
+            \ifx\chato@to\@undefined \else \mbox{ \chato@fortext\ \chato@to}\fi
+            \ifx\chato@author\@undefined\else\mbox{ \chato@fromtext\ \chato@author}\fi:
+            {\color{black}#3}
+        \end{minipage}
       }
-    \end{center}
-  }
-  \newcommand{\question}[2][]{\chato@cmd[#1]{question}{#2}}
-  \newcommand{\mynote}[2][]{\chato@cmd[#1]{mynote}{#2}}
-  \newcommand{\todo}[2][]{\chato@cmd[#1]{todo}{#2}}
-  \newcommand{\reply}[2][]{\chato@cmd[#1]{reply}{#2}}
+    }
+  \end{center}
+}
+% Framed inserts
+\newcommand{\question}[2][]{\chato@cmd[#1]{question}{#2}}
+\newcommand{\mynote}[2][]{\chato@cmd[#1]{mynote}{#2}}
+\newcommand{\todo}[2][]{\chato@cmd[#1]{todo}{#2}}
+\newcommand{\reply}[2][]{\chato@cmd[#1]{reply}{#2}}
+
+% Inline inserts delimiters
+\newcommand{\chato@icmdopen}[0]{\ensuremath\lceil}
+\newcommand{\chato@icmdclose}[0]{\ensuremath\rfloor}
+% Inline inserts template
+\newcommand{\chato@icmd}[2]{
+  \expandafter{\color{\csname chato@clr#1\endcsname}
+    \sf\chato@icmdopen\csname chato@sym#1\endcsname
+    {\color{black}\  #2} \chato@icmdclose}}
+% Inline inserts
+\newcommand{\iquestion}[1]{\chato@icmd{question}{#1}}
+\newcommand{\inote}[1]{\chato@icmd{mynote}{#1}}
+\newcommand{\imynote}[1]{\inote{#1}}
+\newcommand{\itodo}[1]{\chato@icmd{todo}{#1}}
+\newcommand{\ireply}[1]{\chato@icmd{reply}{#1}}
+
+% Missing citations/references
+\newcommand{\chato@citemissingclr}{chato@clrred}
+\newcommand{\chato@refmissingclr}{chato@clrred}
+\newcommand{\chato@citemissingtext}{[citation]}
+\newcommand{\chato@refmissingtext}{reference}
+\newcommand{\citemissing}[0]{\chato@citemissingclr{\chato@citemissingtext}\xspace}
+\newcommand{\refmissing}[0]{\chato@refmissingclr{\chato@refmissingtext}\xspace}
+
+\DeclareOption{show}{
 }
 \DeclareOption{hide}{
-  \newcommand{\question}[2][]{}
-  \newcommand{\mynote}[2][]{}
-  \newcommand{\todo}[2][]{}
-  \newcommand{\reply}[2][]{}
-  \newcommand{\iquestion}[1]{}
-  \newcommand{\inote}[1]{}
-  \newcommand{\itodo}[1]{}
-  \newcommand{\ireply}[1]{}
-  \newcommand{\citemissing}[0]{}
-  \newcommand{\refmissing}[0]{}
+  \renewcommand{\question}[2][]{}
+  \renewcommand{\mynote}[2][]{}
+  \renewcommand{\todo}[2][]{}
+  \renewcommand{\reply}[2][]{}
+  \renewcommand{\iquestion}[1]{}
+  \renewcommand{\inote}[1]{}
+  \renewcommand{\itodo}[1]{}
+  \renewcommand{\ireply}[1]{}
+  \renewcommand{\citemissing}[0]{}
+  \renewcommand{\refmissing}[0]{}
 }
 \ProcessOptions
