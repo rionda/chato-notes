@@ -1,5 +1,6 @@
 # To Do
 
-- [ ] Write some documentation
+- [ ] Convert package to use Doc/DocStrip
+- [ ] Add more package options to allow for customization
+- [ ] Ask Aris and ChaTo about license
 - [ ] Have the package reviewed by someone who actually knows LaTeX
-- [ ] Consider using [The LaTeX Project Public License](http://www.latex-project.org/lppl.txt)
