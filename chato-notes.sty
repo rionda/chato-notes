@@ -57,7 +57,6 @@
 % Framed inserts template
 \newcommand{\chato@cmd}[3][]{
   \setkeys{chato}{#1}
-  \expandafter
   \begin{center}
     {\color{\csname chato@clr#2\endcsname}
       \framebox[.9\columnwidth][l]{
@@ -82,7 +81,7 @@
 \newcommand{\chato@icmdclose}[0]{\ensuremath\rfloor}
 % Inline inserts template
 \newcommand{\chato@icmd}[2]{
-  \expandafter{\color{\csname chato@clr#1\endcsname}
+  {\color{\csname chato@clr#1\endcsname}
     \sf\chato@icmdopen\csname chato@sym#1\endcsname
     {\color{black}\  #2} \chato@icmdclose}}
 % Inline inserts
