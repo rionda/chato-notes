@@ -101,9 +101,9 @@
   \renewcommand{\chato@insertname}{#2}
   \setkeys{chatoinline}{#1}
   \expandafter\newcommand\csname i#2\endcsname[1]{
-    \color{\csname chato@clri#2\endcsname}
+    {\color{\csname chato@clri#2\endcsname}
     \sf\textbf{\textsc{\csname chato@openi#2\endcsname \csname chato@symi#2\endcsname}}
-    {\color{black}\  ##1} \textbf{\textsc{\csname chato@closei#2\endcsname}}}}
+    {\color{black}\  ##1} \textbf{\textsc{\csname chato@closei#2\endcsname}}}}}
 
 \newinlineinsert[clr=\chato@defclrquestion,sym=\chato@defsymquestion]{question}
 \newinlineinsert[clr=\chato@defclrnote,sym=\chato@defsymnote]{note}
