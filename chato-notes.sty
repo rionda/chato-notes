@@ -2,7 +2,7 @@
 % ChaTo - http://www.chato.cl/
 % Wed Dec 24 13:33:00 CET 2008
 %
-% Copyright 2015-16 Matteo Riondato (http://matteo.rionda.to)
+% Copyright 2015-17 Matteo Riondato (http://matteo.rionda.to)
 %
 % Licensed under the Apache License, Version 2.0 (the "License");
 % you may not use this file except in compliance with the License.
@@ -52,6 +52,9 @@
 % Option processing for framed inserts
 \newcommand{\chato@processauthor}[1]{\ifx\relax#1\relax
 \ifx\chato@author\@undefined \else \let\chato@author\@undefined \fi \else\def\chato@author{#1}\fi}
+\newcommand{\chato@processdate}[1]{\ifx\relax#1\relax
+\ifx\chato@date\@undefined \else \let\chato@date\@undefined \fi \else
+\def\chato@date{#1} \fi}
 \newcommand{\chato@processto}[1]{\ifx\relax#1\relax
 \ifx\chato@to\@undefined \else \let\chato@to\@undefined \fi \else
 \def\chato@to{#1} \fi}
@@ -60,7 +63,8 @@
 \define@key{chato}{by}{\chato@processauthor{#1}}
 \define@key{chato}{to}{\chato@processto{#1}}
 \define@key{chato}{for}{\chato@processto{#1}}
-\presetkeys{chato}{author=,from=,by=,to=,for=}{}
+\define@key{chato}{date}{\chato@processdate{#1}}
+\presetkeys{chato}{author=,from=,by=,to=,for=,date=}{}
 % Framed inserts template
 \define@key{chatoframed}{sym}{\chato@setprop{symf}{#1}}
 \define@key{chatoframed}{clr}{\chato@setprop{clrf}{#1}}
@@ -78,7 +82,8 @@
             \sf \textbf{\textsc{\csname chato@symf#2\endcsname\ \csname chato@text#2\endcsname
               \ifx\chato@to\@undefined \else \mbox{ \chato@fortext\ \chato@to}\fi
               \ifx\chato@author\@undefined\else\mbox{ \chato@fromtext\
-              \chato@author}\fi:}}
+              \chato@author}\fi
+              \ifx\chato@date\@undefined \else \mbox{ (\chato@date)}\fi:}}
               {\color{black}##2}
           \end{minipage}
         }
