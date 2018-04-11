@@ -38,17 +38,20 @@
 \newcommand{\chato@defclrquestion}{chato@clrbittersweet}
 \newcommand{\chato@defclrreply}{chato@clrblue}
 \newcommand{\chato@defclrtodo}{chato@clrgreen}
+\newcommand{\chato@defclrwarning}{chato@clrred}
 % Default insert symbols
 \newcommand{\chato@defsymnote}{\Pointinghand}
 \newcommand{\chato@defsymmynote}{\chato@defsymnote}
 \newcommand{\chato@defsymquestion}{?}
 \newcommand{\chato@defsymreply}{\Writinghand}
 \newcommand{\chato@defsymtodo}{\Checkedbox}
+\newcommand{\chato@defsymwarning}{\Biohazard}
 % Default framed insert texts
 \newcommand{\chato@deftextmynote}{Note}
 \newcommand{\chato@deftextquestion}{Question}
 \newcommand{\chato@deftextreply}{Reply}
 \newcommand{\chato@deftexttodo}{To-Do}
+\newcommand{\chato@deftextwarning}{Warning}
 % for/from text for framed inserts
 \newcommand{\chato@fortext}{for}
 \newcommand{\chato@fromtext}{from}
@@ -97,6 +100,7 @@
 \newframedinsert[clr=\chato@defclrquestion,sym=\chato@defsymquestion,text=\chato@deftextquestion]{question}
 \newframedinsert[clr=\chato@defclrreply,sym=\chato@defsymreply,text=\chato@deftextreply]{reply}
 \newframedinsert[clr=\chato@defclrtodo,sym=\chato@defsymtodo,text=\chato@deftexttodo]{todo}
+\newframedinsert[clr=\chato@defclrwarning,sym=\chato@defsymwarning,text=\chato@deftextwarning]{warning}
 
 % Define inline inserts
 \define@key{chatoinline}{sym}{\chato@setprop{symi}{#1}}
@@ -118,6 +122,7 @@
 \newinlineinsert[clr=\chato@defclrquestion,sym=\chato@defsymquestion]{question}
 \newinlineinsert[clr=\chato@defclrreply,sym=\chato@defsymreply]{reply}
 \newinlineinsert[clr=\chato@defclrtodo,sym=\chato@defsymtodo]{todo}
+\newinlineinsert[clr=\chato@defclrwarning,sym=\chato@defsymwarning]{warning}
 
 \newcommand{\chato@citemissingclr}{chato@clrgoldenrod}
 \newcommand{\chato@refmissingclr}{chato@clrprocessblue}
@@ -133,10 +138,12 @@
   \renewcommand{\question}[2][]{}
   \renewcommand{\reply}[2][]{}
   \renewcommand{\todo}[2][]{}
+  \renewcommand{\warning}[2][]{}
   \renewcommand{\inote}[1]{}
   \renewcommand{\iquestion}[1]{}
   \renewcommand{\ireply}[1]{}
   \renewcommand{\itodo}[1]{}
+  \renewcommand{\iwarning}[1]{}
   \renewcommand{\citemissing}{}
   \renewcommand{\refmissing}{}
 }
