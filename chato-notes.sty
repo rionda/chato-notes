@@ -26,9 +26,10 @@
 \newcommand{\chato@setprop}[2]{\expandafter\newcommand\csname chato@#1\chato@insertname\endcsname{#2}}
 
 % Default insert colors
-\definecolor{chato@clrblue}{rgb}{0.0,0.0,0.6}
-\definecolor{chato@clrgreen}{rgb}{0.0,0.6,0.0}
 \definecolor{chato@clrbittersweet}{rgb}{0.55,0.241,0.204}
+\definecolor{chato@clrblue}{rgb}{0.0,0.0,0.6}
+\definecolor{chato@clrgoldenrod}{rgb}{0.525,0.397,0.077}
+\definecolor{chato@clrgreen}{rgb}{0.0,0.6,0.0}
 \definecolor{chato@clrpurple}{rgb}{0.340,0.105,0.555}
 \definecolor{chato@clrred}{rgb}{0.6,0.0,0.0}
 \newcommand{\chato@defclrnote}{chato@clrpurple}
@@ -117,7 +118,7 @@
 \newinlineinsert[clr=\chato@defclrreply,sym=\chato@defsymreply]{reply}
 \newinlineinsert[clr=\chato@defclrtodo,sym=\chato@defsymtodo]{todo}
 
-\newcommand{\chato@citemissingclr}{chato@clrred}
+\newcommand{\chato@citemissingclr}{chato@clrgoldenrod}
 \newcommand{\chato@refmissingclr}{chato@clrblue}
 \newcommand{\chato@citemissingtext}{[Citation]}
 \newcommand{\chato@refmissingtext}{Reference}
