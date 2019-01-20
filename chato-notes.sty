@@ -85,11 +85,12 @@
       {\color{\csname chato@clrf#2\endcsname}
         \framebox[.9\columnwidth][l]{
           \begin{minipage}{.85\columnwidth}
-            \sf \textbf{\textsc{\csname chato@symf#2\endcsname\ \csname chato@text#2\endcsname
+            \sffamily
+            \textbf{\textsc{\csname chato@symf#2\endcsname\ \csname chato@text#2\endcsname
               \ifx\chato@to\@undefined \else \mbox{ \chato@fortext\ \chato@to}\fi
               \ifx\chato@author\@undefined\else\mbox{ \chato@fromtext\
               \chato@author}\fi
-              \ifx\chato@date\@undefined \else \mbox{ (\chato@date)}\fi:}}
+      \ifx\chato@date\@undefined \else \mbox{ (\chato@date)}\fi:}}
               {\color{black}##2}
           \end{minipage}
         }
@@ -114,8 +115,9 @@
   \setkeys{chatoinline}{#1}
   \expandafter\newcommand\csname i#2\endcsname[1]{
     {\color{\csname chato@clri#2\endcsname}
-    \sf\textbf{\textsc{\csname chato@openi#2\endcsname \csname chato@symi#2\endcsname}}
-    {\color{black}\  ##1} \textbf{\textsc{\csname chato@closei#2\endcsname}}}}}
+      \textsf{\textbf{\textsc{\csname chato@openi#2\endcsname \csname
+        chato@symi#2\endcsname}} {\color{black}\  ##1} \textbf{\textsc{\csname
+        chato@closei#2\endcsname}}}}}}
 
 \newinlineinsert[clr=\chato@defclrnote,sym=\chato@defsymnote]{note}
 \newinlineinsert[clr=\chato@defclrmynote,sym=\chato@defsymmynote]{mynote}
@@ -128,8 +130,8 @@
 \newcommand{\chato@refmissingclr}{chato@clrprocessblue}
 \newcommand{\chato@citemissingtext}{[Citation]}
 \newcommand{\chato@refmissingtext}{Reference}
-\newcommand{\citemissing}[0]{{\sf\textbf{\textsc{\color{\chato@citemissingclr}\chato@citemissingtext}}}\xspace}
-\newcommand{\refmissing}[0]{{\sf\textbf{\textsc{\color{\chato@refmissingclr}\chato@refmissingtext}}}\xspace}
+\newcommand{\citemissing}[0]{\textsf{\textbf{\textsc{\color{\chato@citemissingclr}\chato@citemissingtext}}}\xspace}
+\newcommand{\refmissing}[0]{\textsf{\textbf{\textsc{\color{\chato@refmissingclr}\chato@refmissingtext}}}\xspace}
 
 \DeclareOption{show}{
 }
