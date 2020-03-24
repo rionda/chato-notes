@@ -113,9 +113,9 @@
 \newcommand{\newinlineinsert}[2][]{
   \renewcommand{\chato@insertname}{#2}
   \setkeys{chatoinline}{#1}
-  \expandafter\newcommand\csname i#2\endcsname[1]{
-    {\color{\csname chato@clri#2\endcsname}
-      \textsf{\textbf{\textsc{\csname chato@openi#2\endcsname \csname
+  \expandafter\newcommand\csname i#2\endcsname[1]{%
+    {\textsf{\color{\csname chato@clri#2\endcsname}\textbf{\textsc{\csname
+        chato@openi#2\endcsname \csname
         chato@symi#2\endcsname}} {\color{black}\  ##1} \textbf{\textsc{\csname
         chato@closei#2\endcsname}}}}}}
 
