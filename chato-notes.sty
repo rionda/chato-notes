@@ -2,7 +2,7 @@
 % ChaTo - http://www.chato.cl/
 % Wed Dec 24 13:33:00 CET 2008
 %
-% Copyright 2015-18 Matteo Riondato (http://matteo.rionda.to)
+% Copyright 2015-20 Matteo Riondato (http://matteo.rionda.to)
 %
 % Licensed under the Apache License, Version 2.0 (the "License");
 % you may not use this file except in compliance with the License.
@@ -33,6 +33,8 @@
 \definecolor{chato@clrprocessblue}{rgb}{0.077,0.414,0.508}
 \definecolor{chato@clrpurple}{rgb}{0.340,0.105,0.555}
 \definecolor{chato@clrred}{rgb}{0.6,0.0,0.0}
+\definecolor{chato@clrtrueblue}{rgb}{0.0,0.45,0.90}
+\newcommand{\chato@defclridea}{chato@clrtrueblue}
 \newcommand{\chato@defclrnote}{chato@clrpurple}
 \newcommand{\chato@defclrmynote}{\chato@defclrnote}
 \newcommand{\chato@defclrquestion}{chato@clrbittersweet}
@@ -40,6 +42,7 @@
 \newcommand{\chato@defclrtodo}{chato@clrgreen}
 \newcommand{\chato@defclrwarning}{chato@clrred}
 % Default insert symbols
+\newcommand{\chato@defsymidea}{\Laserbeam}
 \newcommand{\chato@defsymnote}{\Pointinghand}
 \newcommand{\chato@defsymmynote}{\chato@defsymnote}
 \newcommand{\chato@defsymquestion}{?}
@@ -47,6 +50,7 @@
 \newcommand{\chato@defsymtodo}{\Checkedbox}
 \newcommand{\chato@defsymwarning}{\Biohazard}
 % Default framed insert texts
+\newcommand{\chato@deftextidea}{Idea}
 \newcommand{\chato@deftextmynote}{Note}
 \newcommand{\chato@deftextquestion}{Question}
 \newcommand{\chato@deftextreply}{Reply}
@@ -97,6 +101,7 @@
       }
   \end{center}}}
 
+\newframedinsert[clr=\chato@defclridea,sym=\chato@defsymidea,text=\chato@deftextidea]{idea}
 \newframedinsert[clr=\chato@defclrmynote,sym=\chato@defsymmynote,text=\chato@deftextmynote]{mynote}
 \newframedinsert[clr=\chato@defclrquestion,sym=\chato@defsymquestion,text=\chato@deftextquestion]{question}
 \newframedinsert[clr=\chato@defclrreply,sym=\chato@defsymreply,text=\chato@deftextreply]{reply}
@@ -119,6 +124,7 @@
         chato@symi#2\endcsname}} {\color{black}\  ##1} \textbf{\textsc{\csname
         chato@closei#2\endcsname}}}}}}
 
+\newinlineinsert[clr=\chato@defclridea,sym=\chato@defsymidea]{idea}
 \newinlineinsert[clr=\chato@defclrnote,sym=\chato@defsymnote]{note}
 \newinlineinsert[clr=\chato@defclrmynote,sym=\chato@defsymmynote]{mynote}
 \newinlineinsert[clr=\chato@defclrquestion,sym=\chato@defsymquestion]{question}
@@ -136,11 +142,13 @@
 \DeclareOption{show}{
 }
 \DeclareOption{hide}{
+  \renewcommand{\idea}[2][]{}
   \renewcommand{\mynote}[2][]{}
   \renewcommand{\question}[2][]{}
   \renewcommand{\reply}[2][]{}
   \renewcommand{\todo}[2][]{}
   \renewcommand{\warning}[2][]{}
+  \renewcommand{\iidea}[2][]{}
   \renewcommand{\inote}[1]{}
   \renewcommand{\iquestion}[1]{}
   \renewcommand{\ireply}[1]{}
