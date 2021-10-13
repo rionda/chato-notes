@@ -2,7 +2,7 @@
 % ChaTo - http://www.chato.cl/
 % Wed Dec 24 13:33:00 CET 2008
 %
-% Copyright 2015-20 Matteo Riondato (http://matteo.rionda.to)
+% Copyright 2015-22 Matteo Riondato (http://matteo.rionda.to)
 %
 % Licensed under the Apache License, Version 2.0 (the "License");
 % you may not use this file except in compliance with the License.
@@ -87,8 +87,8 @@
     \setkeys{chato}{##1}
     \begin{center}
       {\color{\csname chato@clrf#2\endcsname}
-        \framebox[.9\columnwidth][l]{
-          \begin{minipage}{.85\columnwidth}
+        \framebox[.9\linewidth][l]{
+          \begin{minipage}{.85\linewidth}
             \sffamily
             \textbf{\textsc{\csname chato@symf#2\endcsname\ \csname chato@text#2\endcsname
               \ifx\chato@to\@undefined \else \mbox{ \chato@fortext\ \chato@to}\fi
