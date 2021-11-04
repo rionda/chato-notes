@@ -87,7 +87,8 @@
   \expandafter\newcommand\csname #2\endcsname[2][]{
     \setkeys{chato}{##1}
     \begin{center}
-      \begin{tcolorbox}[breakable,colback=white,notitle,colframe=\csname chato@clrf#2\endcsname]
+      \begin{tcolorbox}[breakable,sharp
+        corners,boxrule=.2mm,left=.25mm,right=.25mm,top=.25mm,bottom=.25mm,colback=white,notitle,colframe=\csname chato@clrf#2\endcsname]
         {\color{\csname chato@clrf#2\endcsname}
           \sffamily
           \textbf{\textsc{\csname chato@symf#2\endcsname\ \csname chato@text#2\endcsname
