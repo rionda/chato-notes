@@ -17,7 +17,8 @@
 % limitations under the License.
 
 \ProvidesPackage{chato-notes}[2015/09/22 v0.001a ChaTo notes]
-\RequirePackage{color,ifthen,marvosym,xkeyval,xspace}
+\RequirePackage{color,ifthen,marvosym,tcolorbox,xkeyval,xspace}
+\tcbuselibrary{breakable}
 
 % Variable to store the name of the insert currently under definition
 \newcommand{\chato@insertname}{}
@@ -86,19 +87,16 @@
   \expandafter\newcommand\csname #2\endcsname[2][]{
     \setkeys{chato}{##1}
     \begin{center}
-      {\color{\csname chato@clrf#2\endcsname}
-        \framebox[.9\linewidth][l]{
-          \begin{minipage}{.85\linewidth}
-            \sffamily
-            \textbf{\textsc{\csname chato@symf#2\endcsname\ \csname chato@text#2\endcsname
+      \begin{tcolorbox}[breakable,colback=white,notitle,colframe=\csname chato@clrf#2\endcsname]
+        {\color{\csname chato@clrf#2\endcsname}
+          \sffamily
+          \textbf{\textsc{\csname chato@symf#2\endcsname\ \csname chato@text#2\endcsname
               \ifx\chato@to\@undefined \else \mbox{ \chato@fortext\ \chato@to}\fi
               \ifx\chato@author\@undefined\else\mbox{ \chato@fromtext\
               \chato@author}\fi
-      \ifx\chato@date\@undefined \else \mbox{ (\chato@date)}\fi:}}
-              {\color{black}##2}
-          \end{minipage}
-        }
-      }
+        \ifx\chato@date\@undefined \else \mbox{ (\chato@date)}\fi:}}}
+          ##2
+        \end{tcolorbox}
   \end{center}}}
 
 \newframedinsert[clr=\chato@defclridea,sym=\chato@defsymidea,text=\chato@deftextidea]{idea}
