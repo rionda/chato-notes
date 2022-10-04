@@ -136,7 +136,12 @@
 \newcommand{\chato@refmissingclr}{chato@clrprocessblue}
 \newcommand{\chato@citemissingtext}{[Citation]}
 \newcommand{\chato@refmissingtext}{Reference}
-\newcommand{\citemissing}[0]{\textsf{\textbf{\textsc{\color{\chato@citemissingclr}\chato@citemissingtext}}}\xspace}
+\newcommand{\citemissing@noarg}{\textsf{\textbf{\textsc{\color{\chato@citemissingclr}\chato@citemissingtext}}}\xspace}
+\newcommand{\citemissing@witharg}[1]{\textsf{\textbf{\textsc{\color{\chato@citemissingclr}[#1]}}}\xspace}
+\newcommand{\citemissing}[1][]{%
+    \ifthenelse{\equal{#1}{}}{%
+      \citemissing@noarg{}}{%
+      \citemissing@witharg{#1}}}
 \newcommand{\refmissing}[0]{\textsf{\textbf{\textsc{\color{\chato@refmissingclr}\chato@refmissingtext}}}\xspace}
 
 \DeclareOption{show}{
